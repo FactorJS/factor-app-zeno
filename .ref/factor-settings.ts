@@ -3,8 +3,7 @@ export default {
    * Add custom font to app
    */
   headTags: {
-    font:
-      '<link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,600,700&display=swap" rel="stylesheet" />',
+    font: '<link href="https://fonts.googleapis.com/css?family=Maven+Pro:400,600,700&display=swap" rel="stylesheet" />',
   },
   /**
    * Tailwind CSS Config
@@ -23,8 +22,8 @@ export default {
    */
   site: {
     components: {
-      header: (): Promise<any> => import("./header.vue"),
-      footer: (): Promise<any> => import("./footer.vue"),
+      header: (): Promise<any> => import("../src/Header.vue"),
+      footer: (): Promise<any> => import("../src/Footer.vue"),
     },
     logo: require("./img/logo-zeno.svg"),
     logoInverse: require("./img/logo-zeno-inverse.svg"),
@@ -364,14 +363,14 @@ export default {
     hero: {
       pretitle: "Pricing that scales with your business.",
       title: `Awesome Plans`,
-      content:
-        "Choose the plan that suits your needs.",
+      content: "Choose the plan that suits your needs.",
     },
     packages: [
       {
         classes: "md:mt-6",
         name: "Starter",
-        description: "All the basics for businesses that are just getting started.",
+        description:
+          "All the basics for businesses that are just getting started.",
         price: `$199 <span class="text-base">per month</span>`,
         list: [
           {
@@ -397,7 +396,8 @@ export default {
       },
       {
         name: "Pro",
-        description: "Better insights for growing businesses that want more customers.",
+        description:
+          "Better insights for growing businesses that want more customers.",
         price: `$499 <span class="text-base">per month</span>`,
         list: [
           {
@@ -448,8 +448,7 @@ export default {
           "btn btn-ol border-purple-700 hover:text-purple-500  hover:border-purple-500",
       },
     ],
-    packagesFooter:
-      "* 10 day money back guarantee",
+    packagesFooter: "* 10 day money back guarantee",
     faq: {
       title: "FAQs",
       questions: [
@@ -565,7 +564,8 @@ export default {
       button: {
         link: "/about",
         text: "Learn More",
-        classes: "btn bg-gray-100 rounded text-purple-500 hover:text-purple-600",
+        classes:
+          "btn bg-gray-100 rounded text-purple-500 hover:text-purple-600",
       },
     },
     components: {
