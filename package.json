@@ -1,0 +1,30 @@
+{
+  "name": "@factor/app-zeno",
+  "version": "3.0.0",
+  "license": "MIT",
+  "main": "src/index",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "postcss css/tailwind.css -o tailwind.css"
+  },
+  "gitHead": "b257411e1c6c32b52b444cc6f1518bf1bee1e480",
+  "dependencies": {
+    "@factor/cli": "^3.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
+    "@typescript-eslint/parser": "^4.0.0",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^24.0.0",
+    "eslint-plugin-json": "^3.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-unicorn": "^35.0.0",
+    "eslint-plugin-vue": "^7.1.0"
+  }
+}

@@ -1,0 +1,12 @@
+# Factor
+dist
+
+# Env / Secrets
+.env
+
+# Logs
+logs
+*.log
+
+# Dependency directories
+node_modules/
