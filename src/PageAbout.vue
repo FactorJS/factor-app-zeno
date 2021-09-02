@@ -1,28 +1,26 @@
 <template>
   <main class="bg-gray-100">
-    <el-hero
-      v-if="aboutHero"
+    <Hero
       :align="`left`"
-      :subheadline="aboutHeroPretitle"
-      :headline="aboutHeroTitle"
+      subheadline="About Theme Zeno"
+      headline="Built with Factor CMS"
       class="text-left"
     >
       <template v-slot:hero-content>
-        <div v-html="aboutHeroContent" class="content entry-content" />
+        <div class="content entry-content">
+          Zeno is a minimalist theme suited for the needs of IT companies and
+          tech startups. Zeno styles are powered by Tailwind, a low-level CSS
+          framework.
+        </div>
       </template>
-    </el-hero>
+    </Hero>
 
     <section class="max-w-6xl mx-auto px-4 py-16 md:px-8">
       <div class="flex flex-col md:flex-row md:flex-wrap">
         <div class="w-full relative w-full lg:w-2/5">
+          <img :src="ValuesImg1" class="w-full shadow-xl rounded" />
           <img
-            v-if="setting('about.valuesImage1')"
-            :src="setting('about.valuesImage1')"
-            class="w-full shadow-xl rounded"
-          />
-          <img
-            v-if="setting('about.valuesImage2')"
-            :src="setting('about.valuesImage2')"
+            :src="ValuesImg2"
             class="
               w-full
               relative
@@ -38,7 +36,6 @@
         </div>
         <div class="w-full pt-8 lg:pt-0 md:pl-16 lg:w-3/5">
           <div
-            v-if="setting('about.valuesTitle')"
             class="
               relative
               z-10
@@ -59,12 +56,11 @@
                 md:text-3xl
               "
             >
-              {{ setting("about.valuesTitle") }}
+              A company with core values:
             </h2>
           </div>
 
           <div
-            v-if="setting('about.values')"
             class="
               rounded-lg
               -mt-8
@@ -76,7 +72,7 @@
             "
           >
             <div
-              v-for="(item, index) in setting('about.values')"
+              v-for="(item, index) in values"
               :key="index"
               class="w-full my-2"
             >
@@ -100,14 +96,8 @@
     <section class="py-16 bg-white">
       <div class="max-w-6xl mx-auto px-8">
         <div class="max-w-4xl mx-auto pb-6 text-center md:pb-12 md:w-full">
-          <h3
-            v-if="aboutTeamPretitle"
-            v-html="aboutTeamPretitle"
-            class="custom-uppercase text-purple-500"
-          />
+          <h3 class="custom-uppercase text-purple-500">Meet the Minds</h3>
           <h1
-            v-if="aboutTeamTitle"
-            v-html="aboutTeamTitle"
             class="
               font-normal
               tracking-tight
@@ -115,16 +105,15 @@
               lg:text-4xl
               text-purple-900
             "
-          />
+          >
+            The Team
+          </h1>
         </div>
 
         <!-- Members List -->
-        <div
-          v-if="aboutTeamLayout == 'list' && aboutTeamMembers"
-          class="max-w-3xl mx-auto flex flex-col"
-        >
+        <div class="max-w-3xl mx-auto flex flex-col">
           <section
-            v-for="(member, index) in aboutTeamMembers"
+            v-for="(member, index) in members"
             :key="index"
             class="flex flex-col rounded mb-12 p-8 bg-gray-100 md:flex-row"
           >
@@ -161,10 +150,8 @@
               />
               <div class="transition-all flex mt-4 -ml-2">
                 <template v-for="(item, i) in member.links">
-                  <factor-link
-                    :key="i"
-                    :path="item.path"
-                    :event="item.event"
+                  <router-link
+                    :to="item.path"
                     :target="item.target"
                     class="
                       transition-all
@@ -178,115 +165,152 @@
                       hover:text-purple-500 hover:bg-white
                     "
                   >
-                    <factor-icon v-if="item.icon" :icon="item.icon" />
-                    <span v-if="item.name" v-html="item.name" />
-                  </factor-link>
+                    {{ item.name }}
+                  </router-link>
                 </template>
               </div>
-            </div>
-          </section>
-        </div>
-
-        <!-- Members Grid -->
-        <div
-          v-else-if="aboutTeamLayout == 'grid' && aboutTeamMembers"
-          class="flex flex-col md:flex-row md:flex-wrap"
-        >
-          <section
-            v-for="(member, index) in aboutTeamMembers"
-            :key="index"
-            class="w-full p-4 md:w-1/3"
-          >
-            <div class="p-8 rounded-lg bg-gray-100">
-              <img
-                v-if="member.photo"
-                :src="member.photo"
-                :alt="member.name"
-                class="
-                  w-4/5
-                  rounded-full
-                  mx-auto
-                  border-solid border border-gray-300
-                "
-              />
-              <el-member :name="member.name" :title="member.title">
-                <template v-slot:content>
-                  <div
-                    v-if="member.content"
-                    v-html="member.content"
-                    class="text-lg"
-                  />
-                  <div class="transition-all flex mt-4 -ml-2">
-                    <template v-for="(item, i) in member.links">
-                      <factor-link
-                        :key="i"
-                        :path="item.path"
-                        :event="item.event"
-                        :target="item.target"
-                        class="
-                          transition-all
-                          mx-2
-                          h-8
-                          w-8
-                          rounded
-                          leading-loose
-                          text-center
-                          shadow-lg
-                          hover:text-purple-500 hover:bg-white
-                        "
-                      >
-                        <factor-icon v-if="item.icon" :icon="item.icon" />
-                        <span v-if="item.name" v-html="item.name" />
-                      </factor-link>
-                    </template>
-                  </div>
-                </template>
-              </el-member>
             </div>
           </section>
         </div>
       </div>
     </section>
 
-    <site-cta />
+    <SiteCta />
   </main>
 </template>
 
-<script lang="ts">
-import { factorLink, factorIcon } from "@factor/ui"
-import { setting } from "@factor/api"
+<script lang="ts" setup>
+import SiteCta from "./el/Cta.vue"
+import Hero from "./el/Hero.vue"
 
-export default {
-  components: {
-    factorLink,
-    factorIcon,
-    "el-member": () => import("./el/member.vue"),
-    "el-hero": () => import("./el/hero.vue"),
-    "site-cta": () => import("./el/Cta.vue"),
+import ValuesImg1 from "./img/about1.jpg"
+import ValuesImg2 from "./img/about2.jpg"
+
+const values = [
+  {
+    _item: "simplicity",
+    title: "Simplicity",
+    content:
+      "Do more with less. Given the choice, choose minimization over maximization.",
   },
-  data() {
-    return {
-      loading: true,
-      active: false,
-      aboutHero: setting("about.hero"),
-      aboutHeroPretitle: setting("about.hero.pretitle"),
-      aboutHeroTitle: setting("about.hero.title"),
-      aboutHeroContent: setting("about.hero.content"),
-      aboutTeamPretitle: setting("about.team.pretitle"),
-      aboutTeamTitle: setting("about.team.title"),
-      aboutTeamLayout: setting("about.team.layout"),
-      aboutTeamMembers: setting("about.team.members"),
-    }
+  {
+    _item: "karma",
+    title: "Karma",
+    content:
+      "Be as altruistic as possible. History has proven that karma works in mysterious ways.",
   },
-  methods: {
-    setting,
+  {
+    _item: "humility",
+    title: "Humility",
+    content:
+      "Continually assess and reassess the things you believe & actions you're taking. Never assume.",
   },
-  metaInfo() {
-    return {
-      title: setting("about.meta.title"),
-      description: setting("about.meta.description"),
-      image: setting("about.meta.image"),
-    }
+]
+
+import MemberImg1 from "./img/member1.jpg"
+import MemberImg2 from "./img/member2.jpg"
+import MemberImg3 from "./img/member3.jpg"
+import MemberImg4 from "./img/member4.jpg"
+import MemberImg5 from "./img/member5.jpg"
+import MemberImg6 from "./img/member6.jpg"
+const members = [
+  {
+    _item: "member_1",
+    photo: MemberImg1,
+    title: "Co-Founder",
+    name: "Zeno Elea 1",
+    content:
+      "custom element Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit",
+    links: [
+      {
+        path: "https://www.linkedin.com/",
+        name: "LinkedIn",
+        target: "_blank",
+      },
+      {
+        path: "https://github.com/",
+        name: "Github",
+        target: "_blank",
+      },
+      {
+        path: "https://angel.co/",
+        name: "AngelList",
+        target: "_blank",
+      },
+    ],
   },
-}
+  {
+    _item: "member_2",
+    photo: MemberImg2,
+    title: "Co-Founder",
+    name: "Zeno Elea",
+    content:
+      "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit",
+  },
+  {
+    _item: "member_3",
+    photo: MemberImg3,
+    title: "Managing Partner",
+    name: "Zeno Elea",
+    content:
+      "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit",
+  },
+  {
+    _item: "member_4",
+    photo: MemberImg4,
+    title: "Managing Partner",
+    name: "Zeno Elea",
+    content:
+      "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit",
+  },
+  {
+    _item: "member_5",
+    photo: MemberImg5,
+    title: "Managing Partner",
+    name: "Zeno Elea",
+    content:
+      "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit",
+  },
+  {
+    _item: "member_6",
+    photo: MemberImg6,
+    title: "Managing Partner",
+    name: "Zeno Elea",
+    content:
+      "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit",
+  },
+]
+// export default {
+//   components: {
+//     factorLink,
+//     factorIcon,
+//     "el-member": () => import("./el/member.vue"),
+//     "el-hero": () => import("./el/hero.vue"),
+//     "site-cta": () => import("./el/Cta.vue"),
+//   },
+//   data() {
+//     return {
+//       loading: true,
+//       active: false,
+//       aboutHero: setting("about.hero"),
+//       aboutHeroPretitle: setting("about.hero.pretitle"),
+//       aboutHeroTitle: setting("about.hero.title"),
+//       aboutHeroContent: setting("about.hero.content"),
+//       aboutTeamPretitle: setting("about.team.pretitle"),
+//       aboutTeamTitle: setting("about.team.title"),
+//       aboutTeamLayout: setting("about.team.layout"),
+//       aboutTeamMembers: setting("about.team.members"),
+//     }
+//   },
+//   methods: {
+//     setting,
+//   },
+//   metaInfo() {
+//     return {
+//       title: setting("about.meta.title"),
+//       description: setting("about.meta.description"),
+//       image: setting("about.meta.image"),
+//     }
+//   },
+// }
 </script>
