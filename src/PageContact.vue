@@ -8,7 +8,10 @@
       class="text-center pb-24 md:pb-32"
     >
       <template v-slot:hero-content>
-        <div v-formatted-text="setting('contact.hero.content')" class="content entry-content" />
+        <div
+          v-html="setting('contact.hero.content')"
+          class="content entry-content"
+        />
       </template>
     </el-hero>
 

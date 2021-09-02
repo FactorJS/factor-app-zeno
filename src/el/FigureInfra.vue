@@ -2,8 +2,18 @@
   <figure>
     <figcaption
       v-if="title"
-      class="text-sm text-center font-mono py-1 bg-purple-700 text-purple-300 rounded-t md:rounded-tl"
-    >{{ title }}</figcaption>
+      class="
+        text-sm text-center
+        font-mono
+        py-1
+        bg-purple-700
+        text-purple-300
+        rounded-t
+        md:rounded-tl
+      "
+    >
+      {{ title }}
+    </figcaption>
     <div class="bg-purple-900 text-gray-500 p-4 text-sm md:py-8 md:px-24">
       <pre><code class="prism">{{ code() }}</code></pre>
     </div>
@@ -25,7 +35,7 @@ export default {
     <div class="mx-auto">
 
       <div
-        v-if="subheadline" v-formatted-text="subheadline"
+        v-if="subheadline" v-html="subheadline"
         :class="alignment"
       />
 

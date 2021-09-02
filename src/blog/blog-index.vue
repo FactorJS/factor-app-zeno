@@ -8,7 +8,7 @@
       class="text-center"
     >
       <template v-slot:hero-content>
-        <div v-formatted-text="setting('blog.content')" class="content entry-content" />
+        <div v-html="setting('blog.content')" class="content entry-content" />
       </template>
     </el-hero>
     <section class="blog-posts bg-gray-100 pb-8">
@@ -21,20 +21,37 @@
             <div v-if="page == 1" class="blog-post w-full p-2 lg:w-1/3">
               <div
                 v-if="setting('blog.promo')"
-                class="blog-promo h-full overflow-hidden flex flex-col justify-center px-8 py-20 rounded-lg shadow-xl bg-cover bg-center bg-purple-900"
+                class="
+                  blog-promo
+                  h-full
+                  overflow-hidden
+                  flex flex-col
+                  justify-center
+                  px-8
+                  py-20
+                  rounded-lg
+                  shadow-xl
+                  bg-cover bg-center bg-purple-900
+                "
               >
                 <div
                   v-if="setting('blog.promo.pretitle')"
                   class="custom-uppercase text-purple-400"
-                >{{ setting("blog.promo.pretitle") }}</div>
+                >
+                  {{ setting("blog.promo.pretitle") }}
+                </div>
                 <h1
                   v-if="setting('blog.promo.title')"
                   class="font-normal tracking-tight text-2xl text-gray-300"
-                >{{ setting("blog.promo.title") }}</h1>
+                >
+                  {{ setting("blog.promo.title") }}
+                </h1>
                 <p
                   v-if="setting('blog.promo.content')"
                   class="text-gray-500 mt-2"
-                >{{ setting("blog.promo.content") }}</p>
+                >
+                  {{ setting("blog.promo.content") }}
+                </p>
                 <factor-link
                   v-if="setting('blog.promo.button.link')"
                   :path="setting('blog.promo.button.link')"
@@ -47,8 +64,21 @@
               </div>
             </div>
 
-            <div v-for="post in blogPosts" :key="post._id" class="blog-post w-full p-2 lg:w-1/3">
-              <div class="h-full overflow-hidden flex flex-col rounded-lg shadow-xl bg-white">
+            <div
+              v-for="post in blogPosts"
+              :key="post._id"
+              class="blog-post w-full p-2 lg:w-1/3"
+            >
+              <div
+                class="
+                  h-full
+                  overflow-hidden
+                  flex flex-col
+                  rounded-lg
+                  shadow-xl
+                  bg-white
+                "
+              >
                 <component
                   :is="setting(`blog.components.${_component}`)"
                   v-for="(_component, i) in setting('blog.layout.index')"
@@ -61,11 +91,18 @@
           </div>
           <div v-else class="posts-not-found">
             <div class="text">
-              <div class="font-normal tracking-tight text-2xl">{{ setting("blog.notFound.title") }}</div>
-              <div class="sub-title">{{ setting("blog.notFound.subTitle") }}</div>
+              <div class="font-normal tracking-tight text-2xl">
+                {{ setting("blog.notFound.title") }}
+              </div>
+              <div class="sub-title">
+                {{ setting("blog.notFound.subTitle") }}
+              </div>
             </div>
           </div>
-          <component :is="setting('blog.components.pagination')" :post-type="postType" />
+          <component
+            :is="setting('blog.components.pagination')"
+            :post-type="postType"
+          />
         </div>
       </div>
     </section>
@@ -92,7 +129,9 @@ export default {
     return "nav-white"
   },
   metaInfo() {
-    const title = this.tag ? `Tag "${this.tag}"` : setting("blog.metatags.index.title")
+    const title = this.tag
+      ? `Tag "${this.tag}"`
+      : setting("blog.metatags.index.title")
 
     const description = this.tag
       ? `Articles related to tag: ${this.tag}`

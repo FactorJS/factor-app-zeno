@@ -1,0 +1,72 @@
+body {
+  --color-primary: #6515dd;
+  --color-secondary: #1bfec0;
+  --color-text: #1d0a47;
+  --color-light: #fafbff;
+  scroll-behavior: smooth;
+
+  .btn {
+    transition: 0.29s cubic-bezier(0.52, 0.01, 0.16, 1);
+  }
+
+  .underline {
+    text-decoration-color: var(--color-secondary);
+  }
+
+  //Factor override default styles
+  a {
+    color: inherit;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  select,
+  textarea {
+    box-shadow: none;
+  }
+}
+
+body {
+  @apply font-sans text-gray-800;
+}
+body .zeno-content {
+  opacity: 1;
+}
+.btn {
+  @apply inline-block px-5 py-3 font-sans font-semibold text-sm leading-tight tracking-widest uppercase rounded;
+}
+.btn-ol {
+  @apply border-solid border;
+}
+.custom-uppercase {
+  @apply font-sans font-semibold text-sm mb-2 leading-tight tracking-widest uppercase;
+}
+.custom-card-left {
+  transform: scale(1) perspective(3040px) rotateY(13deg) rotateX(2deg)
+    rotate(-2deg) translateZ(0);
+  box-shadow: 0 55px 80px -40px rgba(0, 0, 0, 0.35);
+}
+.custom-card-left:hover {
+  transform: none;
+}
+.transition-all {
+  transition: 0.15s cubic-bezier(0.52, 0.01, 0.16, 1);
+}
+.transition-height {
+  transition: height 0.15s cubic-bezier(0.52, 0.01, 0.16, 1);
+}
+.h-188 {
+  height: calc(100vh - 56px);
+}
+@media (max-width: 767px) {
+  .custom-card-left {
+    transform: none;
+  }
+}

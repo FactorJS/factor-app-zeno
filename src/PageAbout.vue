@@ -8,7 +8,7 @@
       class="text-left"
     >
       <template v-slot:hero-content>
-        <div v-formatted-text="aboutHeroContent" class="content entry-content" />
+        <div v-html="aboutHeroContent" class="content entry-content" />
       </template>
     </el-hero>
 
@@ -23,31 +23,72 @@
           <img
             v-if="setting('about.valuesImage2')"
             :src="setting('about.valuesImage2')"
-            class="w-full relative mt-8 bottom-0 right-auto left-0 shadow-xl rounded lg:w-2/3 lg:mt-0 lg:absolute lg:-ml-20"
+            class="
+              w-full
+              relative
+              mt-8
+              bottom-0
+              right-auto
+              left-0
+              shadow-xl
+              rounded
+              lg:w-2/3 lg:mt-0 lg:absolute lg:-ml-20
+            "
           />
         </div>
         <div class="w-full pt-8 lg:pt-0 md:pl-16 lg:w-3/5">
           <div
             v-if="setting('about.valuesTitle')"
-            class="relative z-10 px-4 py-6 rounded bg-white shadow-lg md:px-4 md:mx-8"
+            class="
+              relative
+              z-10
+              px-4
+              py-6
+              rounded
+              bg-white
+              shadow-lg
+              md:px-4 md:mx-8
+            "
           >
             <h2
-              class="font-normal tracking-tight leading-tight text-2xl text-purple-500 md:text-3xl"
-            >{{ setting("about.valuesTitle") }}</h2>
+              class="
+                font-normal
+                tracking-tight
+                leading-tight
+                text-2xl text-purple-500
+                md:text-3xl
+              "
+            >
+              {{ setting("about.valuesTitle") }}
+            </h2>
           </div>
 
           <div
             v-if="setting('about.values')"
-            class="rounded-lg -mt-8 p-8 pt-12 border-solid border-2 border-purple-500 flex flex-col md:flex-row md:flex-wrap"
+            class="
+              rounded-lg
+              -mt-8
+              p-8
+              pt-12
+              border-solid border-2 border-purple-500
+              flex flex-col
+              md:flex-row md:flex-wrap
+            "
           >
-            <div v-for="(item, index) in setting('about.values')" :key="index" class="w-full my-2">
+            <div
+              v-for="(item, index) in setting('about.values')"
+              :key="index"
+              class="w-full my-2"
+            >
               <h2
                 v-if="item.title"
                 class="font-normal tracking-tight text-2xl text-purple-900"
-              >{{ item.title }}</h2>
+              >
+                {{ item.title }}
+              </h2>
               <div
                 v-if="item.content"
-                v-formatted-text="item.content"
+                v-html="item.content"
                 class="text-lg text-gray-600"
               />
             </div>
@@ -61,13 +102,19 @@
         <div class="max-w-4xl mx-auto pb-6 text-center md:pb-12 md:w-full">
           <h3
             v-if="aboutTeamPretitle"
-            v-formatted-text="aboutTeamPretitle"
+            v-html="aboutTeamPretitle"
             class="custom-uppercase text-purple-500"
           />
           <h1
             v-if="aboutTeamTitle"
-            v-formatted-text="aboutTeamTitle"
-            class="font-normal tracking-tight text-3xl lg:text-4xl text-purple-900"
+            v-html="aboutTeamTitle"
+            class="
+              font-normal
+              tracking-tight
+              text-3xl
+              lg:text-4xl
+              text-purple-900
+            "
           />
         </div>
 
@@ -86,23 +133,30 @@
                 v-if="member.photo"
                 :src="member.photo"
                 :alt="member.name"
-                class="w-full rounded mx-auto mb-8 border-solid border border-gray-300 md:w-4/5"
+                class="
+                  w-full
+                  rounded
+                  mx-auto
+                  mb-8
+                  border-solid border border-gray-300
+                  md:w-4/5
+                "
               />
             </div>
             <div class="w-full bg-gray-100 md:w-3/5">
               <h2
                 v-if="member.title"
-                v-formatted-text="member.title"
+                v-html="member.title"
                 class="block text-left custom-uppercase mb-0 text-purple-500"
               />
               <h1
                 v-if="member.name"
-                v-formatted-text="member.name"
+                v-html="member.name"
                 class="block text-left font-normal tracking-tight mb-3 text-2xl"
               />
               <div
                 v-if="member.content"
-                v-formatted-text="member.content"
+                v-html="member.content"
                 class="text-lg text-gray-600"
               />
               <div class="transition-all flex mt-4 -ml-2">
@@ -112,10 +166,20 @@
                     :path="item.path"
                     :event="item.event"
                     :target="item.target"
-                    class="transition-all mx-2 h-8 w-8 rounded leading-loose text-center shadow-lg hover:text-purple-500 hover:bg-white"
+                    class="
+                      transition-all
+                      mx-2
+                      h-8
+                      w-8
+                      rounded
+                      leading-loose
+                      text-center
+                      shadow-lg
+                      hover:text-purple-500 hover:bg-white
+                    "
                   >
                     <factor-icon v-if="item.icon" :icon="item.icon" />
-                    <span v-if="item.name" v-formatted-text="item.name" />
+                    <span v-if="item.name" v-html="item.name" />
                   </factor-link>
                 </template>
               </div>
@@ -138,11 +202,20 @@
                 v-if="member.photo"
                 :src="member.photo"
                 :alt="member.name"
-                class="w-4/5 rounded-full mx-auto border-solid border border-gray-300"
+                class="
+                  w-4/5
+                  rounded-full
+                  mx-auto
+                  border-solid border border-gray-300
+                "
               />
               <el-member :name="member.name" :title="member.title">
                 <template v-slot:content>
-                  <div v-if="member.content" v-formatted-text="member.content" class="text-lg" />
+                  <div
+                    v-if="member.content"
+                    v-html="member.content"
+                    class="text-lg"
+                  />
                   <div class="transition-all flex mt-4 -ml-2">
                     <template v-for="(item, i) in member.links">
                       <factor-link
@@ -150,10 +223,20 @@
                         :path="item.path"
                         :event="item.event"
                         :target="item.target"
-                        class="transition-all mx-2 h-8 w-8 rounded leading-loose text-center shadow-lg hover:text-purple-500 hover:bg-white"
+                        class="
+                          transition-all
+                          mx-2
+                          h-8
+                          w-8
+                          rounded
+                          leading-loose
+                          text-center
+                          shadow-lg
+                          hover:text-purple-500 hover:bg-white
+                        "
                       >
                         <factor-icon v-if="item.icon" :icon="item.icon" />
-                        <span v-if="item.name" v-formatted-text="item.name" />
+                        <span v-if="item.name" v-html="item.name" />
                       </factor-link>
                     </template>
                   </div>
@@ -179,7 +262,7 @@ export default {
     factorIcon,
     "el-member": () => import("./el/member.vue"),
     "el-hero": () => import("./el/hero.vue"),
-    "site-cta": () => import("./el/cta.vue"),
+    "site-cta": () => import("./el/Cta.vue"),
   },
   data() {
     return {

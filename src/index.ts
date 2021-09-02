@@ -1,40 +1,28 @@
-import { addFilter, setting, addRoutes } from "@factor/api"
+import { UserConfigApp } from "@factor/api"
 
-if (setting("headTags") != "") {
-  addFilter({
-    key: "addZenoFont",
-    hook: "factor_head",
-    callback: (_: []) => {
-      return [..._, setting("headTags.font")]
-    },
-    priority: 200,
-  })
+export const setup = (): UserConfigApp => {
+  return {
+    routes: [
+      {
+        path: "/",
+        component: (): Promise<any> => import("./home/PageHome.vue"),
+        meta: { nav: true },
+      },
+      {
+        path: "/about",
+        component: (): Promise<any> => import("./PageAbout.vue"),
+        meta: { nav: true },
+      },
+      {
+        path: "/contact",
+        component: (): Promise<any> => import("./PageContact.vue"),
+        meta: { nav: true },
+      },
+      {
+        path: "/pricing",
+        component: (): Promise<any> => import("./PagePricing.vue"),
+        meta: { nav: true },
+      },
+    ],
+  }
 }
-
-// CONTENT ROUTES
-
-addRoutes({
-  key: "zenoRoutes",
-  routes: [
-    {
-      path: "/",
-      component: setting("home.component"),
-      meta: { nav: true },
-    },
-    {
-      path: "/about",
-      component: (): Promise<any> => import("./v-about.vue"),
-      meta: { nav: true },
-    },
-    {
-      path: "/contact",
-      component: (): Promise<any> => import("./v-contact.vue"),
-      meta: { nav: true },
-    },
-    {
-      path: "/pricing",
-      component: (): Promise<any> => import("./v-pricing.vue"),
-      meta: { nav: true },
-    },
-  ],
-})

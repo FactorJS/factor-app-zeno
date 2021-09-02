@@ -1,7 +1,7 @@
 <template>
   <div class="post-entry text-xl leading-relaxed max-w-3xl mx-auto mb-4 px-8">
     <factor-highlight-code>
-      <div v-formatted-text="rendered" />
+      <div v-html="rendered" />
     </factor-highlight-code>
   </div>
 </template>
@@ -126,12 +126,14 @@ export default {
 
       img {
         max-height: 60vh;
-        box-shadow: 0 0 0 1px rgba(73, 86, 105, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 0 1px rgba(73, 86, 105, 0.15),
+          0 1px 2px 0 rgba(0, 0, 0, 0.1);
         transition: all 0.2s ease-in-out;
         border-radius: 5px;
 
         &:hover {
-          box-shadow: 0 0 0 1px rgba(73, 86, 105, 0.15), 0 1px 15px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 0 1px rgba(73, 86, 105, 0.15),
+            0 1px 15px 0 rgba(0, 0, 0, 0.1);
           transform: translateY(-1px);
         }
       }
